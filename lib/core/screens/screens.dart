@@ -1,0 +1,13 @@
+export 'package:movie_genie/core/screens/home_screen/home_screen_widget.dart';
+export 'package:movie_genie/core/screens/films_list_screen/films_list_screen_model.dart';
+export 'package:movie_genie/core/screens/films_list_screen/films_list_screen_wm.dart';
+export 'package:movie_genie/core/screens/films_list_screen/films_list_screen_widget.dart';
+export 'package:movie_genie/core/screens/film_card/film_card_screen_model.dart';
+export 'package:movie_genie/core/screens/film_card/film_card_screen_wm.dart';
+export 'package:movie_genie/core/screens/film_card/film_card_screen_widget.dart';
+export 'package:movie_genie/core/screens/selections_list_screen/selections_list_screen_widget.dart';
+export 'package:movie_genie/core/screens/selections_list_screen/selections_list_screen_model.dart';
+export 'package:movie_genie/core/screens/selections_list_screen/selections_list_screen_wm.dart';
+export 'package:movie_genie/core/screens/profile_screen/profile_screen_model.dart';
+export 'package:movie_genie/core/screens/profile_screen/profile_screen_widget.dart';
+export 'package:movie_genie/core/screens/profile_screen/profile_screen_wm.dart';
