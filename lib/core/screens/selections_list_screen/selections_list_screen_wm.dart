@@ -1,6 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_genie/core/data/model/selection/selection.dart';
 import 'package:movie_genie/core/domain/selection_manager.dart';
+import 'package:movie_genie/core/navigation/app_router.dart';
 import 'package:movie_genie/utils/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'selections_list_screen_model.dart';
@@ -8,6 +11,8 @@ import 'selections_list_screen_widget.dart';
 
 abstract class ISelectionsListScreenWidgetModel implements IWidgetModel, IThemeProvider {
   SelectionManager get selectionManager;
+
+  void onSelectionTap(Selection selection);
 }
 
 SelectionsListScreenWidgetModel defaultSelectionsListScreenWidgetModelFactory(BuildContext context) {
@@ -36,4 +41,9 @@ class SelectionsListScreenWidgetModel
 
   @override
   final SelectionManager selectionManager;
+
+  @override
+  void onSelectionTap(Selection selection) {
+    context.router.navigate(SelectionScreenRoute(selection: selection));
+  }
 }

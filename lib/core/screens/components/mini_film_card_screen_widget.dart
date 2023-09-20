@@ -22,14 +22,14 @@ class MiniCard extends StatelessWidget {
     super.key,
     required Film film,
   })  : title = film.title,
-        picture = film.responsePictureDto.data,
+        picture = film.picture ?? '',
         isWide = false;
 
   MiniCard.selection({
     super.key,
     required Selection selection,
   })  : title = selection.name,
-        picture = selection.responsePictureDto.data,
+        picture = selection.picture ?? '',
         isWide = true;
 
   @override
@@ -39,19 +39,31 @@ class MiniCard extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Image.memory(errorBuilder: (context, __, ___) {
-            return Container(
-              width: isWide ? 280 : 150,
-              height: isWide ? 170 : 225,
-              child: const Center(
-                child: Text("Картинка в отпуске"),
-              ),
-            );
-          },
-              width: isWide ? 280 : 150,
-              height: isWide ? 170 : 225,
-              bytesImage,
-              fit: BoxFit.contain,
+          Image.memory(
+            errorBuilder: (context, __, ___) {
+              if(picture == "loading"){
+                return Container(
+                  color: Colors.white10,
+                  width: isWide ? 280 : 150,
+                  height: isWide ? 170 : 225,
+                  child: const Center(child: CircularProgressIndicator()),
+                );
+              }
+
+              return Container(
+                color: Colors.white10,
+                width: isWide ? 280 : 150,
+                height: isWide ? 170 : 225,
+                child: const Center(
+                  child: Text("Картинка в отпуске",
+                  textAlign: TextAlign.center,),
+                ),
+              );
+            },
+            width: isWide ? 280 : 150,
+            height: isWide ? 170 : 225,
+            bytesImage,
+            fit: BoxFit.cover,
           ),
           Padding(
             padding: const EdgeInsets.only(top: 8.0),

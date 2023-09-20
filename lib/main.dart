@@ -21,9 +21,12 @@ Future<void> _run() async{
     options: DefaultFirebaseOptions.currentPlatform,
   );
   initContainer();
-  runApp(
-    AppDependency(
-      child: App(),
-    ),
-  );
+  if(kIsWeb){
+    runApp(
+      AppDependency(
+        child: App(),
+      ),
+    );
+  }
+
 }

@@ -21,9 +21,9 @@ ResponsePicture _$ResponsePictureFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ResponsePicture {
   @JsonKey(name: "picture_type")
-  String get pictureType =>
+  String? get pictureType =>
       throw _privateConstructorUsedError; //Unit8List, List<String>, List<int> bytes
-  String get data => throw _privateConstructorUsedError;
+  String? get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +37,7 @@ abstract class $ResponsePictureCopyWith<$Res> {
           ResponsePicture value, $Res Function(ResponsePicture) then) =
       _$ResponsePictureCopyWithImpl<$Res, ResponsePicture>;
   @useResult
-  $Res call({@JsonKey(name: "picture_type") String pictureType, String data});
+  $Res call({@JsonKey(name: "picture_type") String? pictureType, String? data});
 }
 
 /// @nodoc
@@ -53,18 +53,18 @@ class _$ResponsePictureCopyWithImpl<$Res, $Val extends ResponsePicture>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pictureType = null,
-    Object? data = null,
+    Object? pictureType = freezed,
+    Object? data = freezed,
   }) {
     return _then(_value.copyWith(
-      pictureType: null == pictureType
+      pictureType: freezed == pictureType
           ? _value.pictureType
           : pictureType // ignore: cast_nullable_to_non_nullable
-              as String,
-      data: null == data
+              as String?,
+      data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ) as $Val);
   }
 }
@@ -77,7 +77,7 @@ abstract class _$$_ResponsePictureCopyWith<$Res>
       __$$_ResponsePictureCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({@JsonKey(name: "picture_type") String pictureType, String data});
+  $Res call({@JsonKey(name: "picture_type") String? pictureType, String? data});
 }
 
 /// @nodoc
@@ -91,18 +91,18 @@ class __$$_ResponsePictureCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? pictureType = null,
-    Object? data = null,
+    Object? pictureType = freezed,
+    Object? data = freezed,
   }) {
     return _then(_$_ResponsePicture(
-      pictureType: null == pictureType
+      pictureType: freezed == pictureType
           ? _value.pictureType
           : pictureType // ignore: cast_nullable_to_non_nullable
-              as String,
-      data: null == data
+              as String?,
+      data: freezed == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -119,10 +119,10 @@ class _$_ResponsePicture implements _ResponsePicture {
 
   @override
   @JsonKey(name: "picture_type")
-  final String pictureType;
+  final String? pictureType;
 //Unit8List, List<String>, List<int> bytes
   @override
-  final String data;
+  final String? data;
 
   @override
   String toString() {
@@ -159,17 +159,17 @@ class _$_ResponsePicture implements _ResponsePicture {
 
 abstract class _ResponsePicture implements ResponsePicture {
   const factory _ResponsePicture(
-      {@JsonKey(name: "picture_type") required final String pictureType,
-      required final String data}) = _$_ResponsePicture;
+      {@JsonKey(name: "picture_type") required final String? pictureType,
+      required final String? data}) = _$_ResponsePicture;
 
   factory _ResponsePicture.fromJson(Map<String, dynamic> json) =
       _$_ResponsePicture.fromJson;
 
   @override
   @JsonKey(name: "picture_type")
-  String get pictureType;
+  String? get pictureType;
   @override //Unit8List, List<String>, List<int> bytes
-  String get data;
+  String? get data;
   @override
   @JsonKey(ignore: true)
   _$$_ResponsePictureCopyWith<_$_ResponsePicture> get copyWith =>

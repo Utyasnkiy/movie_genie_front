@@ -13,6 +13,9 @@ class App extends StatelessWidget {
     return MaterialApp.router(
       routerConfig: _appRouter.config(),
       theme: ThemeData(
+        progressIndicatorTheme: const ProgressIndicatorThemeData(
+          color: Colors.white,
+        ),
         scrollbarTheme: ScrollbarThemeData(
             mainAxisMargin: 5,
             showTrackOnHover: true,

@@ -10,7 +10,9 @@ part 'update_selection_cover.g.dart';
 class UpdateSelectionCoverRequest with _$UpdateSelectionCoverRequest {
   const factory UpdateSelectionCoverRequest({
     // [PNG, JPEG]
-    required String pictureType,
+    @JsonKey(name: "picture_type", defaultValue: "PNG")
+    @Default("JPG")
+    String pictureType,
     required String picture,
     @JsonKey(name: "selection_id") required int selectionId,
   }) = _UpdateSelectionCoverRequest;

@@ -8,8 +8,8 @@ part of 'response_picture.dart';
 
 _$_ResponsePicture _$$_ResponsePictureFromJson(Map<String, dynamic> json) =>
     _$_ResponsePicture(
-      pictureType: json['picture_type'] as String,
-      data: json['data'] as String,
+      pictureType: json['picture_type'] as String?,
+      data: json['data'] as String?,
     );
 
 Map<String, dynamic> _$$_ResponsePictureToJson(_$_ResponsePicture instance) =>

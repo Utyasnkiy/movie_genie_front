@@ -1,8 +1,10 @@
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:movie_genie/core/data/model/film/film.dart';
 import 'package:movie_genie/core/domain/selection_manager.dart';
 import 'package:movie_genie/core/domain/film_manager.dart';
+import 'package:movie_genie/utils/snackbar_ext.dart';
 import 'package:movie_genie/utils/theme_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -27,7 +29,7 @@ FilmCardScreenWidgetModel defaultFilmCardScreenWidgetModelFactory(
   return FilmCardScreenWidgetModel(
     FilmCardScreenModel(context.read<ErrorHandler>()),
     context.read<SelectionManager>(),
-    context.read<FilmManager>(),
+    GetIt.instance.get(),
   );
 }
 
@@ -56,7 +58,10 @@ class FilmCardScreenWidgetModel
 
   @override
   void onWatchLater(Film film) {
-    if(isFavorite){
+    if(!filmManager.checkAuth()){
+      context.showSnackBar("Авторизуйтесь, чтобы добавлять в избранное");
+    }
+    if(!isFavorite){
       filmManager.addToWatchLater(film);
       return;
     }
@@ -65,6 +70,5 @@ class FilmCardScreenWidgetModel
   }
 
   @override
-  // TODO: implement isFavorite
   bool get isFavorite => filmManager.watchLaterState.value.data?.contains(widget.film) ?? false;
 }

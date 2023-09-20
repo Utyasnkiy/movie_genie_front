@@ -16,20 +16,20 @@ class AuthScreenWidget extends ElementaryWidget<IAuthScreenWidgetModel> {
   Widget build(IAuthScreenWidgetModel wm) {
     return Scaffold(
       body: Stack(children: [
-        Center(
-          child: Image.asset(
-            "assets/bg_form.png",
-            fit: BoxFit.contain,
-          ),
+        Image.asset(
+          "assets/bg_form.png",
+          width: MediaQuery.of(wm.context).size.width,
+          height: MediaQuery.of(wm.context).size.height,
+          fit: BoxFit.cover,
         ),
         Align(
           alignment: Alignment.center,
           child: LoginForm(
             loginController: wm.loginController,
             passwordController: wm.passWordController,
-            auth: () => (),
-            toRegister: () => (),
-            back: () => (),
+            auth: () => wm.auth(),
+            toRegister: () => wm.toRegister(),
+            back: () => wm.back(),
           ),
         ),
 

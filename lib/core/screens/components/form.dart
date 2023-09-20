@@ -179,6 +179,7 @@ class RegisterForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 450,
       padding: const EdgeInsets.only(left: 50, right: 50, top: 40, bottom: 50),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40),
@@ -222,12 +223,12 @@ class RegisterForm extends StatelessWidget {
           const SizedBox(
             height: 30,
           ),
-          _FormattedFilledButton(onTap: register, text: "Войти"),
+          _FormattedFilledButton(onTap: register, text: "Зарегистрироваться"),
           const SizedBox(
             height: 30,
           ),
           _FormattedTextButton(
-            text: "Зарегистрироваться",
+            text: "Уже есть аккаунт? Войти",
             onTap: toAuth,
           ),
           const SizedBox(
@@ -271,6 +272,7 @@ class FilmForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 450,
       padding: const EdgeInsets.only(left: 50, right: 50, top: 40, bottom: 50),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(40),

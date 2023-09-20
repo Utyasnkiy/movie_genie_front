@@ -14,5 +14,7 @@ class SaveSelectionRequest with _$SaveSelectionRequest {
     required String name,
     required int owner,
     required List<Film> films,
+    @JsonKey(includeIfNull: false)
+    String? picture,
   }) = _SaveSelection;
 }

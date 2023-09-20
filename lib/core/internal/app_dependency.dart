@@ -34,22 +34,13 @@ class AppDependency extends StatelessWidget {
             container.get<SelectionRepo>(),
           ),
         ),
-        Provider<Favorites>(
-          create: (_) => Favorites(
-            container.get<SelectionRepo>(),
-            container.get<UserData>(),
-          ),
-        ),
-        Provider<FilmManager>(
-          create: (_) => FilmManager(
-            container.get<FilmRepo>(),
-            container.get<UserData>(),
-          ),
-        ),
+
         Provider<Auth>(
           create: (_) => Auth(
             container.get<UserData>(),
             container.get<AuthRepo>(),
+            container.get(),
+            container.get(),
           ),
         ),
       ],

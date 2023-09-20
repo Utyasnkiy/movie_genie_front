@@ -43,10 +43,14 @@ class SelectionsListScreenWidget
                     child: CircularProgressIndicator(),
                   );
                 }
-                return _SelectionsGrid(selections: selectionsLocal, wm: wm);
+                return _SelectionsGrid(
+                    selections: selectionsLocal,
+                    onSelectionTap: wm.onSelectionTap,
+                );
               },
               builder: (context, films) {
-                return _SelectionsGrid(selections: films ?? [], wm: wm);
+                return _SelectionsGrid(
+                    selections: films ?? [], onSelectionTap: wm.onSelectionTap);
               },
             ),
           ),
@@ -58,10 +62,10 @@ class SelectionsListScreenWidget
 
 class _SelectionsGrid extends StatelessWidget {
   const _SelectionsGrid(
-      {super.key, required this.selections, required this.wm});
+      {super.key, required this.selections, required this.onSelectionTap});
 
   final List<Selection> selections;
-  final ISelectionsListScreenWidgetModel wm;
+  final Function(Selection selection) onSelectionTap;
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +78,9 @@ class _SelectionsGrid extends StatelessWidget {
           mainAxisExtent: 250,
         ),
         itemBuilder: (context, index) {
-          return MiniCard.selection(selection: selections[index]);
+          return GestureDetector(
+              onTap: () => onSelectionTap(selections[index]),
+              child: MiniCard.selection(selection: selections[index]));
         });
   }
 }

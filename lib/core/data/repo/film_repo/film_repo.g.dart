@@ -118,33 +118,6 @@ class _FilmRepo implements FilmRepo {
   }
 
   @override
-  Future<MainPageResponse> getMain() async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<MainPageResponse>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              'api/',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = MainPageResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
   Future<ResponsePicture> getFilmCover(int id) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -172,20 +145,20 @@ class _FilmRepo implements FilmRepo {
   }
 
   @override
-  Future<List<Film>> search(String search) async {
+  Future<SearchDto> search(String search) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result =
-        await _dio.fetch<List<dynamic>>(_setStreamType<List<Film>>(Options(
-      method: 'GET',
+    final _data = search;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<SearchDto>(Options(
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'api/film/search/${search}',
+              'api/film/search',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -194,9 +167,7 @@ class _FilmRepo implements FilmRepo {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) => Film.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final value = SearchDto.fromJson(_result.data!);
     return value;
   }
 
@@ -243,7 +214,7 @@ class _FilmRepo implements FilmRepo {
     )
             .compose(
               _dio.options,
-              'api/film/get/films',
+              'api/film/films',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -265,13 +236,13 @@ class _FilmRepo implements FilmRepo {
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
-      method: 'GET',
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          '/api/film/${id}/fav-sel',
+          '/api/selection/will-watch-sel/${id}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -289,13 +260,13 @@ class _FilmRepo implements FilmRepo {
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
-      method: 'GET',
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )
         .compose(
           _dio.options,
-          'path',
+          '/api/selection/delete-will-watch/${id}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -304,6 +275,60 @@ class _FilmRepo implements FilmRepo {
           _dio.options.baseUrl,
           baseUrl,
         ))));
+  }
+
+  @override
+  Future<ResponsePicture> getPicture(int id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<ResponsePicture>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/picture/get/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ResponsePicture.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<int>> getActualIds() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<int>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/picture/get/actual-ids',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = _result.data!.cast<int>();
+    return value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

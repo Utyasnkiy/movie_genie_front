@@ -10,10 +10,10 @@ part 'response_picture.freezed.dart';
 class ResponsePicture with _$ResponsePicture {
   const factory ResponsePicture({
     @JsonKey(name: "picture_type")
-    required String pictureType,
+    required String? pictureType,
     //Unit8List, List<String>, List<int> bytes
 
-    required String data,
+    required String? data,
   }) = _ResponsePicture;
 
   factory ResponsePicture.fromJson(Map<String, dynamic> json) =>

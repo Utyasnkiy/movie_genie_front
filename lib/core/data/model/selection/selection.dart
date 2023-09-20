@@ -18,11 +18,23 @@ class Selection with _$Selection {
     required int owner,
     required String tag,
     required String name,
-    required ResponsePicture responsePictureDto,
+    @JsonKey(name: "picture_id", includeIfNull: false)
+    int? pictureId,
     required List<Film> films,
+    @JsonKey(includeIfNull: false,
+        includeFromJson: false,
+    includeToJson: true)
+    String? picture,
   }) = _Selection;
 
   factory Selection.fromJson(Map<String, dynamic> json) =>
       _$SelectionFromJson(json);
 
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+          other is Film && runtimeType == other.runtimeType && id == other.id;
+
+  @override
+  int get hashCode => id;
 }

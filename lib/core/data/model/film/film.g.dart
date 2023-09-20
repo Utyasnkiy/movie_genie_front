@@ -11,8 +11,7 @@ _$_Film _$$_FilmFromJson(Map<String, dynamic> json) => _$_Film(
       title: json['title'] as String,
       country: json['country'] as String,
       director: json['director'] as String,
-      responsePictureDto: ResponsePicture.fromJson(
-          json['responsePictureDto'] as Map<String, dynamic>),
+      pictureId: json['picture_id'] as int,
       fees: json['fees'] as int,
       plot: json['plot'] as String,
       releaseYear: json['release_year'] as int,
@@ -23,7 +22,7 @@ Map<String, dynamic> _$$_FilmToJson(_$_Film instance) => <String, dynamic>{
       'title': instance.title,
       'country': instance.country,
       'director': instance.director,
-      'responsePictureDto': instance.responsePictureDto,
+      'picture_id': instance.pictureId,
       'fees': instance.fees,
       'plot': instance.plot,
       'release_year': instance.releaseYear,

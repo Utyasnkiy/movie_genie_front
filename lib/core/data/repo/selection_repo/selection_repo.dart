@@ -1,6 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:movie_genie/core/data/model/main_page_response/main_page_response.dart';
+import 'package:movie_genie/core/data/model/response_picture/response_picture.dart';
 import 'package:movie_genie/core/data/model/selection/selection.dart';
+import 'package:movie_genie/core/data/request/update_selection_cover/update_selection_cover.dart';
 import 'package:retrofit/http.dart';
 
 part 'selection_repo.g.dart';
@@ -12,18 +14,20 @@ abstract class SelectionRepo {
   @GET("api/selection/{id}")
   Future<Selection> get(@Path("id") int id);
 
+  @POST("/api/selection/cover-update")
+  Future<int> updateCover(@Body() UpdateSelectionCoverRequest updateCover);
 
-  @GET("/api/user/cust-sel")
+  @GET("/api/user/sel")
   Future<List<Selection>> getFavorites();
 
-  @GET("/api/selection/get/all")
+  @GET("/api/selection/selection")
   Future<List<Selection>> getAll();
 
-  @GET("/api/selection/delete/{selection_id}")
+  @POST("/api/selection/delete/{selection_id}")
   Future<void> delete(@Path("selection_id") int id);
 
   @POST("/api/selection/save")
-  Future<void> create(@Body() Selection selection);
+  Future<int> create(@Body() Selection selection);
 
   @POST("/api/selection/{selection_id}/delete/{film_id}")
   Future<void> deleteFromSelection({
@@ -41,9 +45,15 @@ abstract class SelectionRepo {
     required int filmId,
   });
 
-  @GET("/api/user/add/{id}")
+  @POST("/api/user/add/{id}")
   Future<void> saveToFavorites(@Path("id") int id);
 
   @POST("/api/user/delete/{id}")
   Future<void> removeFromFavorites(@Path("id") int id);
+
+  @GET("/api/picture/get/{id}")
+  Future<ResponsePicture> getPicture(@Path("id") int id);
+
+  @GET("/api/picture/get/actual-ids")
+  Future<List<int>> getActualIds();
 }

@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:elementary/elementary.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:movie_genie/core/data/model/film/film.dart';
 import 'package:movie_genie/core/domain/film_manager.dart';
 import 'package:movie_genie/core/navigation/app_router.dart';
@@ -21,7 +22,7 @@ FilmsListScreenWidgetModel defaultFilmsListScreenWidgetModelFactory(BuildContext
     FilmsListScreenModel(
       context.read(),
     ),
-    context.read<FilmManager>()
+      GetIt.instance.get()
   );
 }
 
@@ -44,6 +45,6 @@ class FilmsListScreenWidgetModel extends WidgetModel<FilmsListScreenWidget, Film
 
   @override
   void onCardTap(Film film) {
-    context.router.push(FilmCardScreenRoute(film: film));
+    context.router.push(FilmCardScreenRoute(film: film, id: film.id));
   }
 }

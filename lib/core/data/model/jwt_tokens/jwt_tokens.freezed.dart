@@ -20,7 +20,9 @@ JwtJokens _$JwtJokensFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$JwtJokens {
+  @JsonKey(name: "access_token")
   String get accessToken => throw _privateConstructorUsedError;
+  @JsonKey(name: "refresh_token")
   String get refreshToken => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
 
@@ -35,7 +37,10 @@ abstract class $JwtJokensCopyWith<$Res> {
   factory $JwtJokensCopyWith(JwtJokens value, $Res Function(JwtJokens) then) =
       _$JwtJokensCopyWithImpl<$Res, JwtJokens>;
   @useResult
-  $Res call({String accessToken, String refreshToken, int id});
+  $Res call(
+      {@JsonKey(name: "access_token") String accessToken,
+      @JsonKey(name: "refresh_token") String refreshToken,
+      int id});
 }
 
 /// @nodoc
@@ -79,7 +84,10 @@ abstract class _$$_JwtJokensCopyWith<$Res> implements $JwtJokensCopyWith<$Res> {
       __$$_JwtJokensCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String accessToken, String refreshToken, int id});
+  $Res call(
+      {@JsonKey(name: "access_token") String accessToken,
+      @JsonKey(name: "refresh_token") String refreshToken,
+      int id});
 }
 
 /// @nodoc
@@ -118,16 +126,18 @@ class __$$_JwtJokensCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_JwtJokens implements _JwtJokens {
   const _$_JwtJokens(
-      {required this.accessToken,
-      required this.refreshToken,
+      {@JsonKey(name: "access_token") required this.accessToken,
+      @JsonKey(name: "refresh_token") required this.refreshToken,
       required this.id});
 
   factory _$_JwtJokens.fromJson(Map<String, dynamic> json) =>
       _$$_JwtJokensFromJson(json);
 
   @override
+  @JsonKey(name: "access_token")
   final String accessToken;
   @override
+  @JsonKey(name: "refresh_token")
   final String refreshToken;
   @override
   final int id;
@@ -169,16 +179,18 @@ class _$_JwtJokens implements _JwtJokens {
 
 abstract class _JwtJokens implements JwtJokens {
   const factory _JwtJokens(
-      {required final String accessToken,
-      required final String refreshToken,
+      {@JsonKey(name: "access_token") required final String accessToken,
+      @JsonKey(name: "refresh_token") required final String refreshToken,
       required final int id}) = _$_JwtJokens;
 
   factory _JwtJokens.fromJson(Map<String, dynamic> json) =
       _$_JwtJokens.fromJson;
 
   @override
+  @JsonKey(name: "access_token")
   String get accessToken;
   @override
+  @JsonKey(name: "refresh_token")
   String get refreshToken;
   @override
   int get id;

@@ -26,12 +26,23 @@ abstract class _$AppRouter extends RootStackRouter {
         ),
       );
     },
+    CreateSearchScreenRoute.name: (routeData) {
+      final args = routeData.argsAs<CreateSearchScreenRouteArgs>(
+          orElse: () => const CreateSearchScreenRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: CreateSearchScreenWidget(
+          key: args.key,
+          wmFactory: args.wmFactory,
+        ),
+      );
+    },
     FilmCardScreenRoute.name: (routeData) {
-      final args = routeData.argsAs<FilmCardScreenRouteArgs>(
-          orElse: () => const FilmCardScreenRouteArgs());
+      final args = routeData.argsAs<FilmCardScreenRouteArgs>();
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: FilmCardScreenWidget(
+          id: args.id,
           film: args.film,
           key: args.key,
           wmFactory: args.wmFactory,
@@ -53,6 +64,17 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const FilmsTab(),
+      );
+    },
+    GodForsakenMeRoute.name: (routeData) {
+      final args = routeData.argsAs<GodForsakenMeRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: GodForsakenMeWidget(
+          myEyesHurt: args.myEyesHurt,
+          key: args.key,
+          wmFactory: args.wmFactory,
+        ),
       );
     },
     HomeScreenRoute.name: (routeData) {
@@ -88,6 +110,28 @@ abstract class _$AppRouter extends RootStackRouter {
       return AutoRoutePage<dynamic>(
         routeData: routeData,
         child: const RatingTab(),
+      );
+    },
+    RegisterScreenRoute.name: (routeData) {
+      final args = routeData.argsAs<RegisterScreenRouteArgs>(
+          orElse: () => const RegisterScreenRouteArgs());
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: RegisterScreenWidget(
+          key: args.key,
+          wmFactory: args.wmFactory,
+        ),
+      );
+    },
+    SelectionScreenRoute.name: (routeData) {
+      final args = routeData.argsAs<SelectionScreenRouteArgs>();
+      return AutoRoutePage<dynamic>(
+        routeData: routeData,
+        child: SelectionScreenWidget(
+          selection: args.selection,
+          key: args.key,
+          wmFactory: args.wmFactory,
+        ),
       );
     },
     SelectionsListScreenRoute.name: (routeData) {
@@ -152,19 +196,53 @@ class AuthScreenRouteArgs {
 }
 
 /// generated route for
+/// [CreateSearchScreenWidget]
+class CreateSearchScreenRoute
+    extends PageRouteInfo<CreateSearchScreenRouteArgs> {
+  CreateSearchScreenRoute({
+    Key? key,
+    WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(
+            BuildContext)
+        wmFactory = defaultCreateSearchScreenWidgetModelFactory,
+    List<PageRouteInfo>? children,
+  }) : super(
+          CreateSearchScreenRoute.name,
+          args: CreateSearchScreenRouteArgs(
+            key: key,
+            wmFactory: wmFactory,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'CreateSearchScreenRoute';
+
+  static const PageInfo<CreateSearchScreenRouteArgs> page =
+      PageInfo<CreateSearchScreenRouteArgs>(name);
+}
+
+class CreateSearchScreenRouteArgs {
+  const CreateSearchScreenRouteArgs({
+    this.key,
+    this.wmFactory = defaultCreateSearchScreenWidgetModelFactory,
+  });
+
+  final Key? key;
+
+  final WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(
+      BuildContext) wmFactory;
+
+  @override
+  String toString() {
+    return 'CreateSearchScreenRouteArgs{key: $key, wmFactory: $wmFactory}';
+  }
+}
+
+/// generated route for
 /// [FilmCardScreenWidget]
 class FilmCardScreenRoute extends PageRouteInfo<FilmCardScreenRouteArgs> {
   FilmCardScreenRoute({
-    Film film = const Film(
-        id: 0,
-        title: "title",
-        country: "country",
-        director: "director",
-        fees: 123,
-        responsePictureDto: ResponsePicture(pictureType: "Png", data: ""),
-        plot:
-            "cockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckck",
-        releaseYear: 123),
+    required int id,
+    required Film film,
     Key? key,
     WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(
             BuildContext)
@@ -173,10 +251,12 @@ class FilmCardScreenRoute extends PageRouteInfo<FilmCardScreenRouteArgs> {
   }) : super(
           FilmCardScreenRoute.name,
           args: FilmCardScreenRouteArgs(
+            id: id,
             film: film,
             key: key,
             wmFactory: wmFactory,
           ),
+          rawPathParams: {'id': id},
           initialChildren: children,
         );
 
@@ -188,19 +268,13 @@ class FilmCardScreenRoute extends PageRouteInfo<FilmCardScreenRouteArgs> {
 
 class FilmCardScreenRouteArgs {
   const FilmCardScreenRouteArgs({
-    this.film = const Film(
-        id: 0,
-        title: "title",
-        country: "country",
-        director: "director",
-        fees: 123,
-        responsePictureDto: ResponsePicture(pictureType: "Png", data: ""),
-        plot:
-            "cockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckck",
-        releaseYear: 123),
+    required this.id,
+    required this.film,
     this.key,
     this.wmFactory = defaultFilmCardScreenWidgetModelFactory,
   });
+
+  final int id;
 
   final Film film;
 
@@ -211,7 +285,7 @@ class FilmCardScreenRouteArgs {
 
   @override
   String toString() {
-    return 'FilmCardScreenRouteArgs{film: $film, key: $key, wmFactory: $wmFactory}';
+    return 'FilmCardScreenRouteArgs{id: $id, film: $film, key: $key, wmFactory: $wmFactory}';
   }
 }
 
@@ -268,6 +342,52 @@ class FilmsTabRoute extends PageRouteInfo<void> {
   static const String name = 'FilmsTabRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [GodForsakenMeWidget]
+class GodForsakenMeRoute extends PageRouteInfo<GodForsakenMeRouteArgs> {
+  GodForsakenMeRoute({
+    required Selection myEyesHurt,
+    Key? key,
+    WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(
+            BuildContext)
+        wmFactory = defaultGodForsakenMeWidgetModelFactory,
+    List<PageRouteInfo>? children,
+  }) : super(
+          GodForsakenMeRoute.name,
+          args: GodForsakenMeRouteArgs(
+            myEyesHurt: myEyesHurt,
+            key: key,
+            wmFactory: wmFactory,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'GodForsakenMeRoute';
+
+  static const PageInfo<GodForsakenMeRouteArgs> page =
+      PageInfo<GodForsakenMeRouteArgs>(name);
+}
+
+class GodForsakenMeRouteArgs {
+  const GodForsakenMeRouteArgs({
+    required this.myEyesHurt,
+    this.key,
+    this.wmFactory = defaultGodForsakenMeWidgetModelFactory,
+  });
+
+  final Selection myEyesHurt;
+
+  final Key? key;
+
+  final WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(
+      BuildContext) wmFactory;
+
+  @override
+  String toString() {
+    return 'GodForsakenMeRouteArgs{myEyesHurt: $myEyesHurt, key: $key, wmFactory: $wmFactory}';
+  }
 }
 
 /// generated route for
@@ -365,6 +485,93 @@ class RatingTabRoute extends PageRouteInfo<void> {
   static const String name = 'RatingTabRoute';
 
   static const PageInfo<void> page = PageInfo<void>(name);
+}
+
+/// generated route for
+/// [RegisterScreenWidget]
+class RegisterScreenRoute extends PageRouteInfo<RegisterScreenRouteArgs> {
+  RegisterScreenRoute({
+    Key? key,
+    WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(
+            BuildContext)
+        wmFactory = defaultRegisterScreenWidgetModelFactory,
+    List<PageRouteInfo>? children,
+  }) : super(
+          RegisterScreenRoute.name,
+          args: RegisterScreenRouteArgs(
+            key: key,
+            wmFactory: wmFactory,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'RegisterScreenRoute';
+
+  static const PageInfo<RegisterScreenRouteArgs> page =
+      PageInfo<RegisterScreenRouteArgs>(name);
+}
+
+class RegisterScreenRouteArgs {
+  const RegisterScreenRouteArgs({
+    this.key,
+    this.wmFactory = defaultRegisterScreenWidgetModelFactory,
+  });
+
+  final Key? key;
+
+  final WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(
+      BuildContext) wmFactory;
+
+  @override
+  String toString() {
+    return 'RegisterScreenRouteArgs{key: $key, wmFactory: $wmFactory}';
+  }
+}
+
+/// generated route for
+/// [SelectionScreenWidget]
+class SelectionScreenRoute extends PageRouteInfo<SelectionScreenRouteArgs> {
+  SelectionScreenRoute({
+    required Selection selection,
+    Key? key,
+    WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(
+            BuildContext)
+        wmFactory = defaultSelectionScreenWidgetModelFactory,
+    List<PageRouteInfo>? children,
+  }) : super(
+          SelectionScreenRoute.name,
+          args: SelectionScreenRouteArgs(
+            selection: selection,
+            key: key,
+            wmFactory: wmFactory,
+          ),
+          initialChildren: children,
+        );
+
+  static const String name = 'SelectionScreenRoute';
+
+  static const PageInfo<SelectionScreenRouteArgs> page =
+      PageInfo<SelectionScreenRouteArgs>(name);
+}
+
+class SelectionScreenRouteArgs {
+  const SelectionScreenRouteArgs({
+    required this.selection,
+    this.key,
+    this.wmFactory = defaultSelectionScreenWidgetModelFactory,
+  });
+
+  final Selection selection;
+
+  final Key? key;
+
+  final WidgetModel<ElementaryWidget<IWidgetModel>, ElementaryModel> Function(
+      BuildContext) wmFactory;
+
+  @override
+  String toString() {
+    return 'SelectionScreenRouteArgs{selection: $selection, key: $key, wmFactory: $wmFactory}';
+  }
 }
 
 /// generated route for

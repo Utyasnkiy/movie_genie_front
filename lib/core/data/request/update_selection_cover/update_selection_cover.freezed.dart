@@ -17,6 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$UpdateSelectionCoverRequest {
 // [PNG, JPEG]
+  @JsonKey(name: "picture_type", defaultValue: "PNG")
   String get pictureType => throw _privateConstructorUsedError;
   String get picture => throw _privateConstructorUsedError;
   @JsonKey(name: "selection_id")
@@ -37,7 +38,7 @@ abstract class $UpdateSelectionCoverRequestCopyWith<$Res> {
           UpdateSelectionCoverRequest>;
   @useResult
   $Res call(
-      {String pictureType,
+      {@JsonKey(name: "picture_type", defaultValue: "PNG") String pictureType,
       String picture,
       @JsonKey(name: "selection_id") int selectionId});
 }
@@ -87,7 +88,7 @@ abstract class _$$_UpdateSelectionCoverRequestCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String pictureType,
+      {@JsonKey(name: "picture_type", defaultValue: "PNG") String pictureType,
       String picture,
       @JsonKey(name: "selection_id") int selectionId});
 }
@@ -130,12 +131,14 @@ class __$$_UpdateSelectionCoverRequestCopyWithImpl<$Res>
 @JsonSerializable(createFactory: false)
 class _$_UpdateSelectionCoverRequest implements _UpdateSelectionCoverRequest {
   const _$_UpdateSelectionCoverRequest(
-      {required this.pictureType,
+      {@JsonKey(name: "picture_type", defaultValue: "PNG")
+      this.pictureType = "JPG",
       required this.picture,
       @JsonKey(name: "selection_id") required this.selectionId});
 
 // [PNG, JPEG]
   @override
+  @JsonKey(name: "picture_type", defaultValue: "PNG")
   final String pictureType;
   @override
   final String picture;
@@ -183,12 +186,14 @@ class _$_UpdateSelectionCoverRequest implements _UpdateSelectionCoverRequest {
 abstract class _UpdateSelectionCoverRequest
     implements UpdateSelectionCoverRequest {
   const factory _UpdateSelectionCoverRequest(
-          {required final String pictureType,
+          {@JsonKey(name: "picture_type", defaultValue: "PNG")
+          final String pictureType,
           required final String picture,
           @JsonKey(name: "selection_id") required final int selectionId}) =
       _$_UpdateSelectionCoverRequest;
 
   @override // [PNG, JPEG]
+  @JsonKey(name: "picture_type", defaultValue: "PNG")
   String get pictureType;
   @override
   String get picture;

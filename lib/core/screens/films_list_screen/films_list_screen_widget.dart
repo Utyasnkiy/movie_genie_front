@@ -3,7 +3,6 @@ import 'package:elementary/elementary.dart';
 import 'package:elementary_helper/elementary_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_genie/core/data/model/film/film.dart';
-import 'package:movie_genie/core/data/model/response_picture/response_picture.dart';
 import 'package:movie_genie/core/screens/components/mini_film_card_screen_widget.dart';
 
 import 'films_list_screen_wm.dart';
@@ -18,14 +17,12 @@ class FilmsListScreenWidget
 
   @override
   Widget build(IFilmsListScreenWidgetModel wm) {
-
     return Container(
       decoration: BoxDecoration(
         color: wm.colorScheme.secondaryContainer,
         borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
       margin: const EdgeInsets.only(left: 40, right: 40, top: 20),
-
       child: Column(
         children: [
           const Align(
@@ -48,7 +45,10 @@ class FilmsListScreenWidget
                   return FilmsGrid(films: filmsLocal, onCardTap: wm.onCardTap);
                 },
                 builder: (context, films) {
-                  return FilmsGrid(films: films ?? [], onCardTap: wm.onCardTap,);
+                  return FilmsGrid(
+                    films: films ?? [],
+                    onCardTap: wm.onCardTap,
+                  );
                 }),
           ),
         ],
@@ -65,19 +65,18 @@ class FilmsGrid extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final localFunc = onCardTap;
     return GridView.builder(
-        itemCount: films.length,
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-
-            childAspectRatio: 150/330,
-        maxCrossAxisExtent: 250,
-        mainAxisExtent: 330),
-        itemBuilder: (context, index) {
-          return GestureDetector(
-              onTap: localFunc == null ? null :() => localFunc(films[index]),
-              child: MiniCard.film(film: films[index]));
-        });
+      itemCount: films.length,
+      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          childAspectRatio: 150 / 330,
+          maxCrossAxisExtent: 250,
+          mainAxisExtent: 330),
+      itemBuilder: (context, index) {
+        return GestureDetector(
+            onTap: localFunc == null ? null : () => localFunc(films[index]),
+            child: MiniCard.film(film: films[index]));
+      },
+    );
   }
 }

@@ -24,8 +24,11 @@ mixin _$Selection {
   int get owner => throw _privateConstructorUsedError;
   String get tag => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  ResponsePicture get responsePictureDto => throw _privateConstructorUsedError;
+  @JsonKey(name: "picture_id", includeIfNull: false)
+  int? get pictureId => throw _privateConstructorUsedError;
   List<Film> get films => throw _privateConstructorUsedError;
+  @JsonKey(includeIfNull: false, includeFromJson: false, includeToJson: true)
+  String? get picture => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -43,10 +46,11 @@ abstract class $SelectionCopyWith<$Res> {
       int owner,
       String tag,
       String name,
-      ResponsePicture responsePictureDto,
-      List<Film> films});
-
-  $ResponsePictureCopyWith<$Res> get responsePictureDto;
+      @JsonKey(name: "picture_id", includeIfNull: false) int? pictureId,
+      List<Film> films,
+      @JsonKey(
+          includeIfNull: false, includeFromJson: false, includeToJson: true)
+      String? picture});
 }
 
 /// @nodoc
@@ -66,8 +70,9 @@ class _$SelectionCopyWithImpl<$Res, $Val extends Selection>
     Object? owner = null,
     Object? tag = null,
     Object? name = null,
-    Object? responsePictureDto = null,
+    Object? pictureId = freezed,
     Object? films = null,
+    Object? picture = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -86,23 +91,19 @@ class _$SelectionCopyWithImpl<$Res, $Val extends Selection>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      responsePictureDto: null == responsePictureDto
-          ? _value.responsePictureDto
-          : responsePictureDto // ignore: cast_nullable_to_non_nullable
-              as ResponsePicture,
+      pictureId: freezed == pictureId
+          ? _value.pictureId
+          : pictureId // ignore: cast_nullable_to_non_nullable
+              as int?,
       films: null == films
           ? _value.films
           : films // ignore: cast_nullable_to_non_nullable
               as List<Film>,
+      picture: freezed == picture
+          ? _value.picture
+          : picture // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ResponsePictureCopyWith<$Res> get responsePictureDto {
-    return $ResponsePictureCopyWith<$Res>(_value.responsePictureDto, (value) {
-      return _then(_value.copyWith(responsePictureDto: value) as $Val);
-    });
   }
 }
 
@@ -118,11 +119,11 @@ abstract class _$$_SelectionCopyWith<$Res> implements $SelectionCopyWith<$Res> {
       int owner,
       String tag,
       String name,
-      ResponsePicture responsePictureDto,
-      List<Film> films});
-
-  @override
-  $ResponsePictureCopyWith<$Res> get responsePictureDto;
+      @JsonKey(name: "picture_id", includeIfNull: false) int? pictureId,
+      List<Film> films,
+      @JsonKey(
+          includeIfNull: false, includeFromJson: false, includeToJson: true)
+      String? picture});
 }
 
 /// @nodoc
@@ -140,8 +141,9 @@ class __$$_SelectionCopyWithImpl<$Res>
     Object? owner = null,
     Object? tag = null,
     Object? name = null,
-    Object? responsePictureDto = null,
+    Object? pictureId = freezed,
     Object? films = null,
+    Object? picture = freezed,
   }) {
     return _then(_$_Selection(
       id: null == id
@@ -160,14 +162,18 @@ class __$$_SelectionCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      responsePictureDto: null == responsePictureDto
-          ? _value.responsePictureDto
-          : responsePictureDto // ignore: cast_nullable_to_non_nullable
-              as ResponsePicture,
+      pictureId: freezed == pictureId
+          ? _value.pictureId
+          : pictureId // ignore: cast_nullable_to_non_nullable
+              as int?,
       films: null == films
           ? _value._films
           : films // ignore: cast_nullable_to_non_nullable
               as List<Film>,
+      picture: freezed == picture
+          ? _value.picture
+          : picture // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -180,8 +186,11 @@ class _$_Selection implements _Selection {
       required this.owner,
       required this.tag,
       required this.name,
-      required this.responsePictureDto,
-      required final List<Film> films})
+      @JsonKey(name: "picture_id", includeIfNull: false) this.pictureId,
+      required final List<Film> films,
+      @JsonKey(
+          includeIfNull: false, includeFromJson: false, includeToJson: true)
+      this.picture})
       : _films = films;
 
   factory _$_Selection.fromJson(Map<String, dynamic> json) =>
@@ -196,7 +205,8 @@ class _$_Selection implements _Selection {
   @override
   final String name;
   @override
-  final ResponsePicture responsePictureDto;
+  @JsonKey(name: "picture_id", includeIfNull: false)
+  final int? pictureId;
   final List<Film> _films;
   @override
   List<Film> get films {
@@ -206,8 +216,12 @@ class _$_Selection implements _Selection {
   }
 
   @override
+  @JsonKey(includeIfNull: false, includeFromJson: false, includeToJson: true)
+  final String? picture;
+
+  @override
   String toString() {
-    return 'Selection(id: $id, owner: $owner, tag: $tag, name: $name, responsePictureDto: $responsePictureDto, films: $films)';
+    return 'Selection(id: $id, owner: $owner, tag: $tag, name: $name, pictureId: $pictureId, films: $films, picture: $picture)';
   }
 
   @override
@@ -219,15 +233,16 @@ class _$_Selection implements _Selection {
             (identical(other.owner, owner) || other.owner == owner) &&
             (identical(other.tag, tag) || other.tag == tag) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.responsePictureDto, responsePictureDto) ||
-                other.responsePictureDto == responsePictureDto) &&
-            const DeepCollectionEquality().equals(other._films, _films));
+            (identical(other.pictureId, pictureId) ||
+                other.pictureId == pictureId) &&
+            const DeepCollectionEquality().equals(other._films, _films) &&
+            (identical(other.picture, picture) || other.picture == picture));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, owner, tag, name,
-      responsePictureDto, const DeepCollectionEquality().hash(_films));
+  int get hashCode => Object.hash(runtimeType, id, owner, tag, name, pictureId,
+      const DeepCollectionEquality().hash(_films), picture);
 
   @JsonKey(ignore: true)
   @override
@@ -249,8 +264,11 @@ abstract class _Selection implements Selection {
       required final int owner,
       required final String tag,
       required final String name,
-      required final ResponsePicture responsePictureDto,
-      required final List<Film> films}) = _$_Selection;
+      @JsonKey(name: "picture_id", includeIfNull: false) final int? pictureId,
+      required final List<Film> films,
+      @JsonKey(
+          includeIfNull: false, includeFromJson: false, includeToJson: true)
+      final String? picture}) = _$_Selection;
 
   factory _Selection.fromJson(Map<String, dynamic> json) =
       _$_Selection.fromJson;
@@ -264,9 +282,13 @@ abstract class _Selection implements Selection {
   @override
   String get name;
   @override
-  ResponsePicture get responsePictureDto;
+  @JsonKey(name: "picture_id", includeIfNull: false)
+  int? get pictureId;
   @override
   List<Film> get films;
+  @override
+  @JsonKey(includeIfNull: false, includeFromJson: false, includeToJson: true)
+  String? get picture;
   @override
   @JsonKey(ignore: true)
   _$$_SelectionCopyWith<_$_Selection> get copyWith =>

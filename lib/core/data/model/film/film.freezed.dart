@@ -24,9 +24,12 @@ mixin _$Film {
   String get title => throw _privateConstructorUsedError;
   String get country => throw _privateConstructorUsedError;
   String get director => throw _privateConstructorUsedError;
-  ResponsePicture get responsePictureDto => throw _privateConstructorUsedError;
+  @JsonKey(name: "picture_id")
+  int get pictureId => throw _privateConstructorUsedError;
   int get fees => throw _privateConstructorUsedError;
   String get plot => throw _privateConstructorUsedError;
+  @JsonKey(includeIfNull: false, includeFromJson: false, includeToJson: false)
+  String? get picture => throw _privateConstructorUsedError;
   @JsonKey(name: "release_year")
   int get releaseYear => throw _privateConstructorUsedError;
 
@@ -45,12 +48,13 @@ abstract class $FilmCopyWith<$Res> {
       String title,
       String country,
       String director,
-      ResponsePicture responsePictureDto,
+      @JsonKey(name: "picture_id") int pictureId,
       int fees,
       String plot,
+      @JsonKey(
+          includeIfNull: false, includeFromJson: false, includeToJson: false)
+      String? picture,
       @JsonKey(name: "release_year") int releaseYear});
-
-  $ResponsePictureCopyWith<$Res> get responsePictureDto;
 }
 
 /// @nodoc
@@ -70,9 +74,10 @@ class _$FilmCopyWithImpl<$Res, $Val extends Film>
     Object? title = null,
     Object? country = null,
     Object? director = null,
-    Object? responsePictureDto = null,
+    Object? pictureId = null,
     Object? fees = null,
     Object? plot = null,
+    Object? picture = freezed,
     Object? releaseYear = null,
   }) {
     return _then(_value.copyWith(
@@ -92,10 +97,10 @@ class _$FilmCopyWithImpl<$Res, $Val extends Film>
           ? _value.director
           : director // ignore: cast_nullable_to_non_nullable
               as String,
-      responsePictureDto: null == responsePictureDto
-          ? _value.responsePictureDto
-          : responsePictureDto // ignore: cast_nullable_to_non_nullable
-              as ResponsePicture,
+      pictureId: null == pictureId
+          ? _value.pictureId
+          : pictureId // ignore: cast_nullable_to_non_nullable
+              as int,
       fees: null == fees
           ? _value.fees
           : fees // ignore: cast_nullable_to_non_nullable
@@ -104,19 +109,15 @@ class _$FilmCopyWithImpl<$Res, $Val extends Film>
           ? _value.plot
           : plot // ignore: cast_nullable_to_non_nullable
               as String,
+      picture: freezed == picture
+          ? _value.picture
+          : picture // ignore: cast_nullable_to_non_nullable
+              as String?,
       releaseYear: null == releaseYear
           ? _value.releaseYear
           : releaseYear // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $ResponsePictureCopyWith<$Res> get responsePictureDto {
-    return $ResponsePictureCopyWith<$Res>(_value.responsePictureDto, (value) {
-      return _then(_value.copyWith(responsePictureDto: value) as $Val);
-    });
   }
 }
 
@@ -131,13 +132,13 @@ abstract class _$$_FilmCopyWith<$Res> implements $FilmCopyWith<$Res> {
       String title,
       String country,
       String director,
-      ResponsePicture responsePictureDto,
+      @JsonKey(name: "picture_id") int pictureId,
       int fees,
       String plot,
+      @JsonKey(
+          includeIfNull: false, includeFromJson: false, includeToJson: false)
+      String? picture,
       @JsonKey(name: "release_year") int releaseYear});
-
-  @override
-  $ResponsePictureCopyWith<$Res> get responsePictureDto;
 }
 
 /// @nodoc
@@ -153,9 +154,10 @@ class __$$_FilmCopyWithImpl<$Res> extends _$FilmCopyWithImpl<$Res, _$_Film>
     Object? title = null,
     Object? country = null,
     Object? director = null,
-    Object? responsePictureDto = null,
+    Object? pictureId = null,
     Object? fees = null,
     Object? plot = null,
+    Object? picture = freezed,
     Object? releaseYear = null,
   }) {
     return _then(_$_Film(
@@ -175,10 +177,10 @@ class __$$_FilmCopyWithImpl<$Res> extends _$FilmCopyWithImpl<$Res, _$_Film>
           ? _value.director
           : director // ignore: cast_nullable_to_non_nullable
               as String,
-      responsePictureDto: null == responsePictureDto
-          ? _value.responsePictureDto
-          : responsePictureDto // ignore: cast_nullable_to_non_nullable
-              as ResponsePicture,
+      pictureId: null == pictureId
+          ? _value.pictureId
+          : pictureId // ignore: cast_nullable_to_non_nullable
+              as int,
       fees: null == fees
           ? _value.fees
           : fees // ignore: cast_nullable_to_non_nullable
@@ -187,6 +189,10 @@ class __$$_FilmCopyWithImpl<$Res> extends _$FilmCopyWithImpl<$Res, _$_Film>
           ? _value.plot
           : plot // ignore: cast_nullable_to_non_nullable
               as String,
+      picture: freezed == picture
+          ? _value.picture
+          : picture // ignore: cast_nullable_to_non_nullable
+              as String?,
       releaseYear: null == releaseYear
           ? _value.releaseYear
           : releaseYear // ignore: cast_nullable_to_non_nullable
@@ -203,9 +209,12 @@ class _$_Film implements _Film {
       required this.title,
       required this.country,
       required this.director,
-      required this.responsePictureDto,
+      @JsonKey(name: "picture_id") required this.pictureId,
       required this.fees,
       required this.plot,
+      @JsonKey(
+          includeIfNull: false, includeFromJson: false, includeToJson: false)
+      this.picture,
       @JsonKey(name: "release_year") required this.releaseYear});
 
   factory _$_Film.fromJson(Map<String, dynamic> json) => _$$_FilmFromJson(json);
@@ -219,18 +228,22 @@ class _$_Film implements _Film {
   @override
   final String director;
   @override
-  final ResponsePicture responsePictureDto;
+  @JsonKey(name: "picture_id")
+  final int pictureId;
   @override
   final int fees;
   @override
   final String plot;
+  @override
+  @JsonKey(includeIfNull: false, includeFromJson: false, includeToJson: false)
+  final String? picture;
   @override
   @JsonKey(name: "release_year")
   final int releaseYear;
 
   @override
   String toString() {
-    return 'Film(id: $id, title: $title, country: $country, director: $director, responsePictureDto: $responsePictureDto, fees: $fees, plot: $plot, releaseYear: $releaseYear)';
+    return 'Film(id: $id, title: $title, country: $country, director: $director, pictureId: $pictureId, fees: $fees, plot: $plot, picture: $picture, releaseYear: $releaseYear)';
   }
 
   @override
@@ -243,10 +256,11 @@ class _$_Film implements _Film {
             (identical(other.country, country) || other.country == country) &&
             (identical(other.director, director) ||
                 other.director == director) &&
-            (identical(other.responsePictureDto, responsePictureDto) ||
-                other.responsePictureDto == responsePictureDto) &&
+            (identical(other.pictureId, pictureId) ||
+                other.pictureId == pictureId) &&
             (identical(other.fees, fees) || other.fees == fees) &&
             (identical(other.plot, plot) || other.plot == plot) &&
+            (identical(other.picture, picture) || other.picture == picture) &&
             (identical(other.releaseYear, releaseYear) ||
                 other.releaseYear == releaseYear));
   }
@@ -254,7 +268,7 @@ class _$_Film implements _Film {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, country, director,
-      responsePictureDto, fees, plot, releaseYear);
+      pictureId, fees, plot, picture, releaseYear);
 
   @JsonKey(ignore: true)
   @override
@@ -276,9 +290,12 @@ abstract class _Film implements Film {
       required final String title,
       required final String country,
       required final String director,
-      required final ResponsePicture responsePictureDto,
+      @JsonKey(name: "picture_id") required final int pictureId,
       required final int fees,
       required final String plot,
+      @JsonKey(
+          includeIfNull: false, includeFromJson: false, includeToJson: false)
+      final String? picture,
       @JsonKey(name: "release_year") required final int releaseYear}) = _$_Film;
 
   factory _Film.fromJson(Map<String, dynamic> json) = _$_Film.fromJson;
@@ -292,11 +309,15 @@ abstract class _Film implements Film {
   @override
   String get director;
   @override
-  ResponsePicture get responsePictureDto;
+  @JsonKey(name: "picture_id")
+  int get pictureId;
   @override
   int get fees;
   @override
   String get plot;
+  @override
+  @JsonKey(includeIfNull: false, includeFromJson: false, includeToJson: false)
+  String? get picture;
   @override
   @JsonKey(name: "release_year")
   int get releaseYear;

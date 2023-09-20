@@ -46,6 +46,32 @@ class _SelectionRepo implements SelectionRepo {
   }
 
   @override
+  Future<int> updateCover(UpdateSelectionCoverRequest updateCover) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = updateCover;
+    final _result = await _dio.fetch<int>(_setStreamType<int>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/api/selection/cover-update',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+    final value = _result.data!;
+    return value;
+  }
+
+  @override
   Future<List<Selection>> getFavorites() async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -59,7 +85,7 @@ class _SelectionRepo implements SelectionRepo {
     )
             .compose(
               _dio.options,
-              '/api/user/cust-sel',
+              '/api/user/sel',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -88,7 +114,7 @@ class _SelectionRepo implements SelectionRepo {
     )
             .compose(
               _dio.options,
-              '/api/selection/get/all',
+              '/api/selection/selection',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -110,7 +136,7 @@ class _SelectionRepo implements SelectionRepo {
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
-      method: 'GET',
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )
@@ -128,12 +154,12 @@ class _SelectionRepo implements SelectionRepo {
   }
 
   @override
-  Future<void> create(Selection selection) async {
+  Future<int> create(Selection selection) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = selection;
-    await _dio.fetch<void>(_setStreamType<void>(Options(
+    final _result = await _dio.fetch<int>(_setStreamType<int>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -149,6 +175,8 @@ class _SelectionRepo implements SelectionRepo {
           _dio.options.baseUrl,
           baseUrl,
         ))));
+    final value = _result.data!;
+    return value;
   }
 
   @override
@@ -212,7 +240,7 @@ class _SelectionRepo implements SelectionRepo {
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
-      method: 'GET',
+      method: 'POST',
       headers: _headers,
       extra: _extra,
     )
@@ -251,6 +279,60 @@ class _SelectionRepo implements SelectionRepo {
           _dio.options.baseUrl,
           baseUrl,
         ))));
+  }
+
+  @override
+  Future<ResponsePicture> getPicture(int id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<ResponsePicture>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/picture/get/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = ResponsePicture.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<int>> getActualIds() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<int>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/api/picture/get/actual-ids',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = _result.data!.cast<int>();
+    return value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

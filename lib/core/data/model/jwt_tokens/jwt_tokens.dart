@@ -6,7 +6,9 @@ part 'jwt_tokens.freezed.dart';
 @freezed
 class JwtJokens with _$JwtJokens {
   const factory JwtJokens({
+    @JsonKey(name: "access_token")
     required String accessToken,
+    @JsonKey(name: "refresh_token")
     required String refreshToken,
     required int id,
   }) = _JwtJokens;

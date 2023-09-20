@@ -20,6 +20,8 @@ mixin _$SaveSelectionRequest {
   String get name => throw _privateConstructorUsedError;
   int get owner => throw _privateConstructorUsedError;
   List<Film> get films => throw _privateConstructorUsedError;
+  @JsonKey(includeIfNull: false)
+  String? get picture => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +35,12 @@ abstract class $SaveSelectionRequestCopyWith<$Res> {
           $Res Function(SaveSelectionRequest) then) =
       _$SaveSelectionRequestCopyWithImpl<$Res, SaveSelectionRequest>;
   @useResult
-  $Res call({String tag, String name, int owner, List<Film> films});
+  $Res call(
+      {String tag,
+      String name,
+      int owner,
+      List<Film> films,
+      @JsonKey(includeIfNull: false) String? picture});
 }
 
 /// @nodoc
@@ -54,6 +61,7 @@ class _$SaveSelectionRequestCopyWithImpl<$Res,
     Object? name = null,
     Object? owner = null,
     Object? films = null,
+    Object? picture = freezed,
   }) {
     return _then(_value.copyWith(
       tag: null == tag
@@ -72,6 +80,10 @@ class _$SaveSelectionRequestCopyWithImpl<$Res,
           ? _value.films
           : films // ignore: cast_nullable_to_non_nullable
               as List<Film>,
+      picture: freezed == picture
+          ? _value.picture
+          : picture // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -84,7 +96,12 @@ abstract class _$$_SaveSelectionCopyWith<$Res>
       __$$_SaveSelectionCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String tag, String name, int owner, List<Film> films});
+  $Res call(
+      {String tag,
+      String name,
+      int owner,
+      List<Film> films,
+      @JsonKey(includeIfNull: false) String? picture});
 }
 
 /// @nodoc
@@ -102,6 +119,7 @@ class __$$_SaveSelectionCopyWithImpl<$Res>
     Object? name = null,
     Object? owner = null,
     Object? films = null,
+    Object? picture = freezed,
   }) {
     return _then(_$_SaveSelection(
       tag: null == tag
@@ -120,6 +138,10 @@ class __$$_SaveSelectionCopyWithImpl<$Res>
           ? _value._films
           : films // ignore: cast_nullable_to_non_nullable
               as List<Film>,
+      picture: freezed == picture
+          ? _value.picture
+          : picture // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -131,7 +153,8 @@ class _$_SaveSelection implements _SaveSelection {
       {required this.tag,
       required this.name,
       required this.owner,
-      required final List<Film> films})
+      required final List<Film> films,
+      @JsonKey(includeIfNull: false) this.picture})
       : _films = films;
 
   @override
@@ -149,8 +172,12 @@ class _$_SaveSelection implements _SaveSelection {
   }
 
   @override
+  @JsonKey(includeIfNull: false)
+  final String? picture;
+
+  @override
   String toString() {
-    return 'SaveSelectionRequest(tag: $tag, name: $name, owner: $owner, films: $films)';
+    return 'SaveSelectionRequest(tag: $tag, name: $name, owner: $owner, films: $films, picture: $picture)';
   }
 
   @override
@@ -161,13 +188,14 @@ class _$_SaveSelection implements _SaveSelection {
             (identical(other.tag, tag) || other.tag == tag) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.owner, owner) || other.owner == owner) &&
-            const DeepCollectionEquality().equals(other._films, _films));
+            const DeepCollectionEquality().equals(other._films, _films) &&
+            (identical(other.picture, picture) || other.picture == picture));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, tag, name, owner,
-      const DeepCollectionEquality().hash(_films));
+      const DeepCollectionEquality().hash(_films), picture);
 
   @JsonKey(ignore: true)
   @override
@@ -188,7 +216,8 @@ abstract class _SaveSelection implements SaveSelectionRequest {
       {required final String tag,
       required final String name,
       required final int owner,
-      required final List<Film> films}) = _$_SaveSelection;
+      required final List<Film> films,
+      @JsonKey(includeIfNull: false) final String? picture}) = _$_SaveSelection;
 
   @override
   String get tag;
@@ -198,6 +227,9 @@ abstract class _SaveSelection implements SaveSelectionRequest {
   int get owner;
   @override
   List<Film> get films;
+  @override
+  @JsonKey(includeIfNull: false)
+  String? get picture;
   @override
   @JsonKey(ignore: true)
   _$$_SaveSelectionCopyWith<_$_SaveSelection> get copyWith =>

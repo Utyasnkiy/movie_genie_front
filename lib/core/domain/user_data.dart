@@ -1,44 +1,76 @@
+import 'dart:html';
+
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:rxdart/rxdart.dart';
 
 
-class UserData{
+class UserData {
   String? accessToken;
   String? refreshToken;
   int? id;
 
   final BehaviorSubject<bool> isLoggedIn = BehaviorSubject.seeded(false);
   final FlutterSecureStorage storage;
+  String? role = "none";
+  final Storage _localStorage = window.localStorage;
 
   UserData(this.storage);
-  
-  Future<void> init() async{
-    accessToken = await storage.read(key: "access");
-    refreshToken = await storage.read(key: "refresh");
-    final stringId = await storage.read(key: "id");
 
-    if(stringId != null){
+  String getCachedPicture(int id){
+    final pic = _localStorage[id.toString()];
+    return pic ?? "loading";
+  }
+
+  void cachePicture(String? base64, int id){
+    if(base64 == null){
+      debugPrint("pic is null");
+      return;
+    }
+    _localStorage[id.toString()] = base64;
+  }
+
+  Future<void> init() async {
+    accessToken = _localStorage["access"];
+    refreshToken = _localStorage["refresh"];
+    final stringId = _localStorage["id"];
+    debugPrint("acc : $accessToken");
+
+    debugPrint("ref : $refreshToken");
+    debugPrint("id : $stringId");
+    if (stringId != null) {
+      if (stringId == "-1") {
+        isLoggedIn.add(false);
+        return;
+      }
       id = int.parse(stringId);
       isLoggedIn.add(true);
-    } else{
+    } else {
       isLoggedIn.add(false);
     }
   }
 
-  void clearTokens(){
+  void clearTokens() {
     accessToken = null;
     refreshToken = null;
+    role = null;
     id = null;
     isLoggedIn.add(false);
 
-    saveTokens();
+
+    _localStorage["access"] = accessToken ?? "";
+    _localStorage["refresh"] = refreshToken ?? "";
+    _localStorage["role"] = role ?? "";
+    _localStorage["id"] = (id ?? -1).toString();
   }
 
-  void saveTokens(){
+  void saveTokens() {
+    debugPrint(role);
 
     isLoggedIn.add(true);
-    storage.write(key: "access", value: accessToken);
-    storage.write(key: "refresh", value: refreshToken);
-    storage.write(key: "id", value: id.toString());
+    _localStorage["role"] = role ?? "";
+    _localStorage["access"] = accessToken ?? "";
+    _localStorage["refresh"] = refreshToken ?? "";
+    _localStorage["id"] = (id ?? -1).toString();
   }
 }

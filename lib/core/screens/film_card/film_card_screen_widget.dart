@@ -14,26 +14,20 @@ import 'film_card_screen_wm.dart';
 class FilmCardScreenWidget
     extends ElementaryWidget<IFilmCardScreenWidgetModel> {
   const FilmCardScreenWidget({
-    this.film = const Film(
-        id: 0,
-        title: "title",
-        country: "country",
-        director: "director",
-        fees: 123,
-        responsePictureDto: ResponsePicture(pictureType: "Png", data: ""),
-        plot:
-            "cockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckckcockckckckckckckckckkcckckckkckck",
-        releaseYear: 123),
+    @PathParam("id")
+    required int id,
+    required this.film,
     Key? key,
     WidgetModelFactory wmFactory = defaultFilmCardScreenWidgetModelFactory,
   }) : super(wmFactory, key: key);
+
 
   final Film film;
 
   @override
   Widget build(IFilmCardScreenWidgetModel wm) {
     final bytesImage =
-        const Base64Decoder().convert(film.responsePictureDto.data ?? "");
+        const Base64Decoder().convert(film.picture ?? "");
     return Scaffold(
       body: EntityStateNotifierBuilder(
         listenableEntityState: wm.filmManager.watchLaterState,
@@ -84,10 +78,20 @@ class Card extends StatelessWidget {
               children: [
                 Image.memory(
                   errorBuilder: (context, __, ___) {
-                    return Container(
+                    if(film.picture == "loading"){
+                      return const SizedBox(
+                        width: 300,
+                        height: 600,
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }
+
+                    return const SizedBox(
                       width: 300,
                       height: 600,
-                      child: const Center(
+                      child: Center(
                         child: Text("Картинка в отпуске"),
                       ),
                     );
@@ -135,26 +139,32 @@ class Card extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
+                      width: 185,
                       height: 30,
-                      child: FilledButton(
-                        onPressed: () => wm.onWatchLater(film),
-                        child: const Center(
-                          child: Text("Буду смотреть"),
-                        ),
+                      child: Stack(
+                        children: [
+
+                          FilledButton(
+                            onPressed: () => wm.onWatchLater(film),
+                            child: const Center(
+                              child: Text("Буду смотреть"),
+                            ),
+
+                          ),
+                          if(favorites)
+                            Positioned(
+                              right: 5,
+                              top: -1,
+                              child: Image.asset(
+                                "assets/bookmark.png",
+                                height: 28,
+                              ),
+                            )
+
+                        ],
                       ),
                     ),
-                    const SizedBox(
-                      width: 80,
-                    ),
-                    SizedBox(
-                      height: 30,
-                      child: FilledButton(
-                        onPressed: () => wm.onAddToSelection(film),
-                        child: const Center(
-                          child: Text("Добавить в подборку"),
-                        ),
-                      ),
-                    ),
+
                   ],
                 ),
               ),

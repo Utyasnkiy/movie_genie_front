@@ -49,7 +49,7 @@ class ProfileScreenWidget extends ElementaryWidget<IProfileScreenWidgetModel> {
           ),
         ),
         EntityStateNotifierBuilder(
-          listenableEntityState: wm.favorites.favoriteSelections,
+          listenableEntityState: wm.favorites.favoriteState,
           loadingBuilder: (context, state) {
             final selections = state ?? [];
             if (selections.isEmpty) {
@@ -112,7 +112,7 @@ class _FavoritesSlider extends StatelessWidget {
         color: Theme.of(context).colorScheme.secondary,
         borderRadius: BorderRadius.circular(10),
       ),
-      height: 200,
+      height: 230,
       child: Scrollbar(
         controller: wm.favoritesController,
         child: ListView.builder(
@@ -121,11 +121,17 @@ class _FavoritesSlider extends StatelessWidget {
           itemCount: selections.length + 1,
           itemBuilder: (context, index) {
             if (index == selections.length) {
-              return const _AddNewSelectionWidget.selection(onTapNew: null);
+              return Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: AddNewSelectionWidget.selection(onTapNew: wm.toSelectionList),
+              );
             }
-            return Padding(
+            return Container(
+              alignment: Alignment.center,
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              child: MiniCard.selection(selection: selections[index]),
+              child: GestureDetector(
+                  onTap: () => wm.toSelection(selections[index]),
+                  child: MiniCard.selection(selection: selections[index])),
             );
           },
         ),
@@ -157,11 +163,17 @@ class _FilmsSlider extends StatelessWidget {
 
           itemBuilder: (context, index) {
             if (index == films.length) {
-              return const _AddNewSelectionWidget.film(onTapNew: null);
+              return Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: AddNewSelectionWidget.film(onTapNew: wm.toFilmList),
+              );
             }
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              child: Center(child: MiniCard.film(film: films[index])),
+            return GestureDetector(
+              onTap: () => wm.toFilm(films[index]),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0),
+                child: Center(child: MiniCard.film(film: films[index])),
+              ),
             );
           },
         ),
@@ -170,14 +182,14 @@ class _FilmsSlider extends StatelessWidget {
   }
 }
 
-class _AddNewSelectionWidget extends StatelessWidget {
-  const _AddNewSelectionWidget(
+class AddNewSelectionWidget extends StatelessWidget {
+  const AddNewSelectionWidget(
       {super.key, this.onTapNew, required this.isWide});
 
-  const _AddNewSelectionWidget.film({super.key, this.onTapNew})
+  const AddNewSelectionWidget.film({super.key, this.onTapNew})
       : isWide = false;
 
-  const _AddNewSelectionWidget.selection({super.key, this.onTapNew})
+  const AddNewSelectionWidget.selection({super.key, this.onTapNew})
       : isWide = true;
 
   final VoidCallback? onTapNew;
@@ -188,7 +200,7 @@ class _AddNewSelectionWidget extends StatelessWidget {
     return InkWell(
       onTap: onTapNew,
       child: Align(
-        alignment: Alignment.center,
+        alignment: Alignment.topCenter,
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: 15),
           width: isWide ? 280 : 150,
