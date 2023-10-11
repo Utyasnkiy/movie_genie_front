@@ -97,10 +97,10 @@ class CreateSearchScreenWidget
                       debugPrint("pic create ${wm.pic}");
                       await wm.createSelection(Selection(
                           id: -1,
-                          owner: wm.userData.id ?? -1,
+                          owner: wm.userData.id ?? 0,
                           tag: "tag",
                           name: name,
-                          picture: wm.pic ?? "wtf",
+                          picture: wm.pic,
                           films: wm.films.value.data ?? <Film>[]));
                     },
                     child: const Center(

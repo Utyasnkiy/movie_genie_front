@@ -105,6 +105,11 @@ class ProfileScreenWidgetModel
 
   @override
   void toFilmList() {
+    final auth = _userData.isLoggedIn.valueOrNull ?? false;
+    if (!auth) {
+      context.showSnackBar("Авторизуйтесь, чтобы добавлять фильмы");
+      return;
+    }
     context.router.navigate(
       FilmsTabRoute(
         children: [FilmsListScreenRoute()],
@@ -114,7 +119,7 @@ class ProfileScreenWidgetModel
 
   @override
   void toSelectionList() {
-    final auth = _userData.isLoggedIn.valueOrNull ?? true;
+    final auth = _userData.isLoggedIn.valueOrNull ?? false;
     if (!auth) {
       context.showSnackBar("Авторизуйтесь, чтобы добавлять подборки");
       return;

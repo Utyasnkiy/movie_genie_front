@@ -18,16 +18,24 @@ class UserData {
   UserData(this.storage);
 
   String getCachedPicture(int id){
-    final pic = _localStorage[id.toString()];
-    return pic ?? "loading";
+    try {
+      final pic = _localStorage[id.toString()];
+      return pic ?? "loading";
+    } catch(e){
+      return "loading";
+    }
   }
 
   void cachePicture(String? base64, int id){
-    if(base64 == null){
-      debugPrint("pic is null");
+    try {
+      if (base64 == null) {
+        debugPrint("pic is null");
+        return;
+      }
+      _localStorage[id.toString()] = base64;
+    } catch(e){
       return;
     }
-    _localStorage[id.toString()] = base64;
   }
 
   Future<void> init() async {

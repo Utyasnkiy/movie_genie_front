@@ -115,7 +115,7 @@ class Card extends StatelessWidget {
                         Text("Год производства: ${film.releaseYear}"),
                         Text("Страна производства: ${film.country}"),
                         Text("Режиссёр: ${film.director}"),
-                        Text("Сборы в мире: ${film.fees}"),
+                        Text("Сборы в мире: ${film.fees} \$"),
                         Text(
                           film.plot,
                         ),
