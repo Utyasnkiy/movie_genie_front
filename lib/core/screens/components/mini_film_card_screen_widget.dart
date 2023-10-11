@@ -35,7 +35,11 @@ class MiniCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bytesImage = decoder.convert(picture);
-    return SizedBox(
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxHeight: isWide? 245: 300,
+        maxWidth: isWide? 290 : 150,
+      ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -66,10 +70,13 @@ class MiniCard extends StatelessWidget {
             fit: BoxFit.cover,
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 8.0),
+            padding: const EdgeInsets.only(top: 8.0, left: 5, right: 5),
             child: Center(
               child: Text(
                 title,
+                maxLines: 2,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
           ),

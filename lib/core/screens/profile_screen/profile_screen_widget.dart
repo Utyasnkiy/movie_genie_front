@@ -153,7 +153,7 @@ class _FilmsSlider extends StatelessWidget {
         color: Theme.of(context).colorScheme.secondary,
         borderRadius: BorderRadius.circular(10),
       ),
-      height: 280,
+      height: 320,
       child: Scrollbar(
         controller: wm.watchLaterController,
         child: ListView.builder(
@@ -171,8 +171,10 @@ class _FilmsSlider extends StatelessWidget {
             return GestureDetector(
               onTap: () => wm.toFilm(films[index]),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 15.0),
-                child: Center(child: MiniCard.film(film: films[index])),
+                padding: const EdgeInsets.only(left: 15.0, right: 15, top: 10),
+                child: Align(
+                    alignment: Alignment.topCenter,
+                    child: MiniCard.film(film: films[index])),
               ),
             );
           },

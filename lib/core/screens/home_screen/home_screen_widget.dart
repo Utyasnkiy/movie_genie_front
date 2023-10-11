@@ -106,12 +106,14 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                   minWidth: 32,
                   onDestinationSelected: (index) {
                     setState(() {
+                      search.clear();
                       selectedIndex = index;
                       if (index != tabsRouter.activeIndex) {
                         tabsRouter.setActiveIndex(index);
                       }else{
                         if(index == 0){
                           GetIt.instance.get<FilmManager>().updateFilms();
+
                         }
                         if(index == 1){
                           context.read<SelectionManager>().update();
