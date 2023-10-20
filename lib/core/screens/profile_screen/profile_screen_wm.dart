@@ -107,7 +107,10 @@ class ProfileScreenWidgetModel
   void toFilmList() {
     final auth = _userData.isLoggedIn.valueOrNull ?? false;
     if (!auth) {
-      context.showSnackBar("Авторизуйтесь, чтобы добавлять фильмы");
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Авторизуйтесь, чтобы добавлять фильмы")))
+          .closed
+          .then((value) => ScaffoldMessenger.of(context).clearSnackBars());
       return;
     }
     context.router.navigate(
@@ -121,7 +124,10 @@ class ProfileScreenWidgetModel
   void toSelectionList() {
     final auth = _userData.isLoggedIn.valueOrNull ?? false;
     if (!auth) {
-      context.showSnackBar("Авторизуйтесь, чтобы добавлять подборки");
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Авторизуйтесь, чтобы добавлять подборки")))
+          .closed
+          .then((value) => ScaffoldMessenger.of(context).clearSnackBars());
       return;
     }
     context.router.push(

@@ -96,7 +96,10 @@ class SelectionScreenWidgetModel
   @override
   void addSelection(Selection selection) {
     if (!favorites.checkAuth()) {
-      context.showSnackBar("Авторизуйтесь чтобы добавлять подборки");
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Авторизуйтесь, чтобы добавлять подборки")))
+          .closed
+          .then((value) => ScaffoldMessenger.of(context).clearSnackBars());
       return;
     }
     favorites.addToFavorites(selection);
@@ -110,7 +113,10 @@ class SelectionScreenWidgetModel
   @override
   onTapRemove(Selection selection) {
     if (!favorites.checkAuth()) {
-      context.showSnackBar("Авторизуйтесь чтобы добавлять подборки");
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Авторизуйтесь, чтобы добавлять подборки")))
+          .closed
+          .then((value) => ScaffoldMessenger.of(context).clearSnackBars());
       return;
     }
     favorites.removeFromFavorites(selection);

@@ -109,8 +109,15 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
                       search.clear();
                       selectedIndex = index;
                       if (index != tabsRouter.activeIndex) {
-                        tabsRouter.setActiveIndex(index);
-                      }else{
+                        if (index == 2 && GetIt.instance.get<UserData>().isLoggedIn.valueOrNull != true) {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(content: Text("Авторизуйтесь, чтобы войти в личный кабинет")))
+                              .closed
+                              .then((value) => ScaffoldMessenger.of(context).clearSnackBars());
+                        } else {
+                          tabsRouter.setActiveIndex(index);
+                        }
+                      } else {
                         if(index == 0){
                           GetIt.instance.get<FilmManager>().updateFilms();
 

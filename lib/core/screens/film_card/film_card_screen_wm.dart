@@ -59,7 +59,10 @@ class FilmCardScreenWidgetModel
   @override
   void onWatchLater(Film film) {
     if(!filmManager.checkAuth()){
-      context.showSnackBar("Авторизуйтесь, чтобы добавлять в избранное");
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text("Авторизуйтесь, чтобы добавлять в избранное")))
+          .closed
+          .then((value) => ScaffoldMessenger.of(context).clearSnackBars());
     }
     if(!isFavorite){
       filmManager.addToWatchLater(film);
